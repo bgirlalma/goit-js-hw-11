@@ -16,7 +16,7 @@ buttonElement.style.display = 'none';
 formElement.addEventListener('submit', function(e){
     e.preventDefault();
 
-    let searchEl = e.target.searchEl.value.trim();
+    let searchEl = e.target.elements['searchEl'].value.trim();
     if (searchEl === '') {
         Notify.warning('Input field is empty or contains only spaces');
         return;

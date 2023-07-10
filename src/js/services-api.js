@@ -27,8 +27,8 @@ export async function getImages() {
     let options = {
         key: API_KEY,
         q: searchEl,
-        image_type: photo,
-        orientation: horizontal,
+        image_type: "photo",
+        orientation: "horizontal",
         safesearch: true,
         page: currentPage,
         per_page: 40,
