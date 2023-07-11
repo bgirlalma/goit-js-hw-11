@@ -1,16 +1,18 @@
 export function markup(data) {
- return data
- .map(
-    ({
-      webformatURL,
-      largeImageURL,
-      tags,
-      views,
-      comments,
-      downloads,
-      likes,
-    }) => `<div class="photo-card">
-    <img src="" alt="${webformatURL}" loading="${tags}" />
+  return data
+    .map(
+      ({
+        webformatURL,
+        largeImageURL,
+        tags,
+        views,
+        comments,
+        downloads,
+        likes,
+      }) =>
+        `<div class="photo-card">
+  <a href="${largeImageURL}">
+    <img class="image" src="${webformatURL}" alt="${tags}" loading="lazy"/>
     <div class="info">
       <p class="info-item">
         <b>Likes: ${likes}</b>
@@ -25,5 +27,8 @@ export function markup(data) {
         <b>Downloads: ${downloads}</b>
       </p>
     </div>
-  </div>`).join('');
-};
+  </a>
+</div>`
+    )
+    .join('');
+}
