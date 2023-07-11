@@ -38,6 +38,7 @@ formElement.addEventListener('submit', function (e) {
   getImages().then(function ({hits, totalHits}) {
     if (hits.length === 0) {
       Notify.failure('Опааа, вийшла помилка!!');
+      buttonElement.style.display = "none";
       return;
     }
     galleryElement.insertAdjacentHTML('beforeend', markup(hits));
