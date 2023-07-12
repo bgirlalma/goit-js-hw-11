@@ -14,6 +14,7 @@ import { Report } from 'notiflix/build/notiflix-report-aio';
 let formElement = document.querySelector('#search-form');
 let galleryElement = document.querySelector('.gallery');
 let buttonElement = document.querySelector('.load-more');
+let hits = []; // Объявление переменной hits
 
 buttonElement.style.display = 'none';
 
@@ -23,7 +24,7 @@ formElement.addEventListener('submit', function (e) {
   let searchQuery = e.target.elements.searchQuery.value.trim();
 
   if (searchQuery === '') {
-    Notify.warning('Input field is empty or contains only spaces');
+    Notify.warning('Поле ввода пустое или содержит только пробелы');
     return;
   }
   setSearchQuery(searchQuery);
@@ -31,7 +32,8 @@ formElement.addEventListener('submit', function (e) {
   buttonElement.hidden = true;
   galleryElement.innerHTML = '';
 
-  getImages().then(function ({hits, totalHits}) {
+  getImages().then(function ({hits: newHits, totalHits}) {
+    hits = newHits; // Присваивание значений переменной hits
     if (hits.length === 0) {
       Notify.failure('Опааа, вийшла помилка!!');
       buttonElement.style.display = "none";
@@ -41,23 +43,31 @@ formElement.addEventListener('submit', function (e) {
     buttonElement.hidden = false;
     buttonElement.style.display = 'block';
   });
+});
 
-buttonElement.addEventListener('click', function () {
-  pagesNext()
-    if (!hits || dhits.length === '') {
-      Report.info("We're sorry, but you've reached the end of search results.");
-      buttonElement.hidden = true;
-      return;
-    }
-
-    galleryElement.insertAdjacentHTML('beforeend', markup(hits));
-    buttonElement.hidden = false;
-    buttonElement.style.display = 'block';
-  });
-
+function initSimpleLightbox() {
   new SimpleLightbox('.gallery a', {
     captionDelay: 200,
     captionsData: 'alt',
   });
-  });
+}
 
+buttonElement.addEventListener('click', function () {
+  pagesNext();
+  if (!hits || hits.length === '') {
+    Report.info('Извините, но вы достигли конца результатов поиска.');
+    buttonElement.hidden = true;
+    return;
+  }
+
+  galleryElement.insertAdjacentHTML('beforeend', markup(hits));
+  buttonElement.hidden = false;
+  buttonElement.style.display = 'block';
+
+  initSimpleLightbox();
+
+  // new SimpleLightbox('.gallery a', {
+  //   captionDelay: 200,
+  //   captionsData: 'alt',
+  // });
+});
