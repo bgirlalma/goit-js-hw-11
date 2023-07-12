@@ -44,7 +44,7 @@ formElement.addEventListener('submit', function (e) {
 
 buttonElement.addEventListener('click', function () {
   pagesNext()
-    if (!data || data.length === '') {
+    if (!hits || dhits.length === '') {
       Report.info("We're sorry, but you've reached the end of search results.");
       buttonElement.hidden = true;
       return;
@@ -54,7 +54,7 @@ buttonElement.addEventListener('click', function () {
     buttonElement.hidden = false;
     buttonElement.style.display = 'block';
   });
-  
+
   new SimpleLightbox('.gallery a', {
     captionDelay: 200,
     captionsData: 'alt',
