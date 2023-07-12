@@ -1,8 +1,4 @@
 import SimpleLightbox from 'simplelightbox';
-new SimpleLightbox('.gallery a', {
-  captionDelay: 200,
-  captionsData: 'alt',
-});
 
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import {
@@ -21,16 +17,21 @@ let buttonElement = document.querySelector('.load-more');
 
 buttonElement.style.display = 'none';
 
+new SimpleLightbox('.gallery a', {
+  captionDelay: 200,
+  captionsData: 'alt',
+});
+
 formElement.addEventListener('submit', function (e) {
   e.preventDefault();
 
-  let searchEl = e.target.elements.searchQuery.value.trim();
+  let searchQuery = e.target.elements.searchQuery.value.trim();
 
-  if (searchEl === '') {
+  if (searchQuery === '') {
     Notify.warning('Input field is empty or contains only spaces');
     return;
   }
-  setSearchQuery(searchEl);
+  setSearchQuery(searchQuery);
   imageReset();
   buttonElement.hidden = true;
   galleryElement.innerHTML = '';
@@ -54,13 +55,9 @@ buttonElement.addEventListener('click', function () {
       return;
     }
 
-    gallery.insertAdjacentHTML('beforeend', markup(data));
-    new SimpleLightbox('.gallery a', {
-      captionDelay: 200,
-      captionsData: 'alt',
-    });
-    loadMoreBtn.hidden = false;
-    loadMoreBtn.style.display = 'block';
+    galleryElement.insertAdjacentHTML('beforeend', markup(hits));
+    buttonElement.hidden = false;
+    buttonElement.style.display = 'block';
   });
   });
 });

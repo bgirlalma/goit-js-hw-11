@@ -5,6 +5,7 @@ const BASE_URL = 'https://pixabay.com/api/';
 const API_KEY = '38170214-8c71bc4e5e037f06482b3b999';
 let searchQuery = '';
 let currentPage = 1;
+let isLoading = false;
 
 export function pagesNext() {
   currentPage = currentPage + 1;
@@ -26,8 +27,9 @@ export async function getImages() {
   try {
     let {data} = await axios.get(BASE_URL, { params: options });
     return data;
+
   } catch (error) {
-    Notify.failure(error.message);
+    Notify.failure('Помилка: ' + error.message);
   }
 }
 export function setSearchQuery(newQuery) {
