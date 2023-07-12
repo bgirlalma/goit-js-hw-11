@@ -17,11 +17,6 @@ let buttonElement = document.querySelector('.load-more');
 
 buttonElement.style.display = 'none';
 
-new SimpleLightbox('.gallery a', {
-  captionDelay: 200,
-  captionsData: 'alt',
-});
-
 formElement.addEventListener('submit', function (e) {
   e.preventDefault();
 
@@ -48,7 +43,7 @@ formElement.addEventListener('submit', function (e) {
   });
 
 buttonElement.addEventListener('click', function () {
-  pagesNext().then(function (data) {
+  pagesNext()
     if (!data || data.length === '') {
       Report.info("We're sorry, but you've reached the end of search results.");
       buttonElement.hidden = true;
@@ -59,5 +54,10 @@ buttonElement.addEventListener('click', function () {
     buttonElement.hidden = false;
     buttonElement.style.display = 'block';
   });
+  
+  new SimpleLightbox('.gallery a', {
+    captionDelay: 200,
+    captionsData: 'alt',
   });
-});
+  });
+
