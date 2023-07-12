@@ -12,7 +12,7 @@ export function markup(data) {
       }) =>
         `<div class="photo-card">
   <a href="${largeImageURL}">
-    <img class="image" src="${webformatURL}" alt="${tags}" loading="lazy" width="300"/>
+    <img class="image" src="${webformatURL}" alt="${tags}" loading="lazy"/>
     <div class="info">
       <p class="info-item">
         <b>Likes: ${likes}</b>
