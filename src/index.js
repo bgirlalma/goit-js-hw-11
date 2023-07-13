@@ -32,7 +32,7 @@ formElement.addEventListener('submit', function (e) {
   buttonElement.hidden = true;
   galleryElement.innerHTML = '';
 
-  getImages().then(function ({hits: newHits, totalHits}) {
+  getImages().then(function ({hits: newHits}) {
     hits = newHits; // Присваивание значений переменной hits
     if (hits.length === 0) {
       Notify.failure('Опааа, вийшла помилка!!');
@@ -44,13 +44,6 @@ formElement.addEventListener('submit', function (e) {
     buttonElement.style.display = 'block';
   });
 });
-
-function initSimpleLightbox() {
-  new SimpleLightbox('.gallery a', {
-    captionDelay: 200,
-    captionsData: 'alt',
-  });
-}
 
 buttonElement.addEventListener('click', function () {
   pagesNext();
@@ -64,10 +57,11 @@ buttonElement.addEventListener('click', function () {
   buttonElement.hidden = false;
   buttonElement.style.display = 'block';
 
-  initSimpleLightbox();
-
-  // new SimpleLightbox('.gallery a', {
-  //   captionDelay: 200,
-  //   captionsData: 'alt',
-  // });
+  const lightbox = new SimpleLightbox('.gallery a', {
+    captionsData: 'alt',
+    captionPosition: 'bottom',
+    captionDelay: 250,
+  });
+  
+  lightbox.refresh();
 });
